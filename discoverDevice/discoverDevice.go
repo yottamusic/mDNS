@@ -2,7 +2,6 @@ package discoverDevice
 
 import (
 	"context"
-	"flag"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -28,9 +27,9 @@ func serviceCall(ip string, port int) {
 
 func DiscoverDevice() {
 
-	service := flag.String("service", "_yottamusic._tcp", "Set the Service Category to look for Devices.")
-	domain := flag.String("domain", "local", "Set the search Domain.")
-	waitTime := flag.Int("wait", 10, "Duration in [s] to run Discovery.")
+	service := "_yottamusic._tcp" //flag.String("service", "_yottamusic._tcp", "Set the Service Category to look for Devices.")
+	domain := "local"             //flag.String("domain", "local", "Set the search Domain.")
+	waitTime := 10                //flag.Int("wait", 10, "Duration in [s] to run Discovery.")
 
 	// Discover all Services on the Network (For _yottamusic._tcp)
 	resolver, err := zeroconf.NewResolver(nil)
@@ -48,9 +47,9 @@ func DiscoverDevice() {
 		log.Println("No more entries.")
 	}(entries)
 
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second*time.Duration(*waitTime))
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*time.Duration(waitTime))
 	defer cancel()
-	err = resolver.Browse(ctx, *service, *domain, entries)
+	err = resolver.Browse(ctx, service, domain, entries)
 	if err != nil {
 		log.Fatalln("Failed to Browse:", err.Error())
 	}
