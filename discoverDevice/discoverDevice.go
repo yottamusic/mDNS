@@ -1,4 +1,4 @@
-package main
+package discoverDevice
 
 import (
 	"context"
@@ -32,7 +32,7 @@ func serviceCall(ip string, port int) {
 	log.Printf("Response: %s\n", data)
 }
 
-func main() {
+func DiscoverDevice() {
 
 	flag.Parse()
 
@@ -63,4 +63,5 @@ func main() {
 
 	// Wait some additional time to see debug messages on go routine shutdown.
 	time.Sleep(1 * time.Second)
+	return
 }

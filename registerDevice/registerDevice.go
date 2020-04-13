@@ -1,4 +1,4 @@
-package main
+package registerDevice
 
 import (
 	"flag"
@@ -19,7 +19,7 @@ var (
 	port    = flag.Int("port", 80, "Set the port the service is listening to.")
 )
 
-func main() {
+func RegisterDevice() {
 
 	flag.Parse()
 	hostName, err := ioutil.ReadFile("/etc/hostname")
@@ -52,5 +52,6 @@ func main() {
 		// Exit by timeout
 	}
 
-	log.Println("Shutting down.")
+	log.Println("Shutting down mDNS Registration")
+	return
 }
