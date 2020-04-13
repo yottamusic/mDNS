@@ -12,12 +12,6 @@ import (
 	"github.com/grandcat/zeroconf"
 )
 
-var (
-	service  = flag.String("service", "_yottamusic._tcp", "Set the Service Category to look for Devices.")
-	domain   = flag.String("domain", "local", "Set the search Domain.")
-	waitTime = flag.Int("wait", 10, "Duration in [s] to run Discovery.")
-)
-
 func serviceCall(ip string, port int) {
 	url := fmt.Sprintf("http://%v:%v", ip, port)
 
@@ -34,7 +28,9 @@ func serviceCall(ip string, port int) {
 
 func DiscoverDevice() {
 
-	flag.Parse()
+	service := flag.String("service", "_yottamusic._tcp", "Set the Service Category to look for Devices.")
+	domain := flag.String("domain", "local", "Set the search Domain.")
+	waitTime := flag.Int("wait", 10, "Duration in [s] to run Discovery.")
 
 	// Discover all Services on the Network (For _yottamusic._tcp)
 	resolver, err := zeroconf.NewResolver(nil)

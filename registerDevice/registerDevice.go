@@ -12,16 +12,13 @@ import (
 	"github.com/grandcat/zeroconf"
 )
 
-var (
-	name    = flag.String("name", "YottaMusic", "Name for the Service.")
-	service = flag.String("service", "_yottamusic._tcp", "Set the service type of the new Service.")
-	domain  = flag.String("domain", "local.", "Set the network Domain.")
-	port    = flag.Int("port", 80, "Set the port the service is listening to.")
-)
-
 func RegisterDevice() {
 
-	flag.Parse()
+	name := flag.String("name", "YottaMusic", "Name for the Service.")
+	service := flag.String("service", "_yottamusic._tcp", "Set the service type of the new Service.")
+	domain := flag.String("domain", "local.", "Set the network Domain.")
+	port := flag.Int("port", 80, "Set the port the service is listening to.")
+
 	hostName, err := ioutil.ReadFile("/etc/hostname")
 	if err != nil {
 		log.Fatal(err)
