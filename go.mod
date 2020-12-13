@@ -1,4 +1,4 @@
-module github.com/yottamusic/mDNS
+module github.com/yottamusic/zeroconf
 
 go 1.15
 
