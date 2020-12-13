@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/yottamusic/mDNS/mdns"
+	"github.com/yottamusic/zeroconf/mdns"
 )
 
 func main() {
