@@ -1,4 +1,4 @@
-package discoverDevice
+package mdns
 
 import (
 	"context"
@@ -25,7 +25,8 @@ func serviceCall(ip string, port int) {
 	log.Printf("Response: %s\n", data)
 }
 
-func DiscoverDevice() {
+// DiscoverService for discovering registered Services over mDNS
+func DiscoverService() {
 
 	service := "_yottamusic._tcp" //flag.String("service", "_yottamusic._tcp", "Set the Service Category to look for Devices.")
 	domain := "local"             //flag.String("domain", "local", "Set the search Domain.")

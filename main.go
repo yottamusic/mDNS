@@ -4,8 +4,7 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/yottamusic/mDNS/discoverDevice"
-	"github.com/yottamusic/mDNS/registerDevice"
+	"github.com/yottamusic/mDNS/mdns"
 )
 
 func main() {
@@ -14,12 +13,12 @@ func main() {
 	var operation string
 	flag.StringVar(&operation, "operation", "register", "Register or Discover YottaMusic Devices")
 	flag.Parse()
-	fmt.Println("Starting to ", operation)
+	fmt.Println("Starting to", operation)
 
 	if operation == "register" {
-		registerDevice.RegisterDevice()
+		mdns.RegisterService()
 	} else if operation == "discover" {
-		discoverDevice.DiscoverDevice()
+		mdns.DiscoverService()
 	} else {
 		fmt.Println("Invalid Operation")
 	}

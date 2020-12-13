@@ -1,8 +1,6 @@
-package registerDevice
+package mdns
 
 import (
-	"fmt"
-	"io/ioutil"
 	"log"
 	"os"
 	"os/signal"
@@ -11,26 +9,34 @@ import (
 	"github.com/grandcat/zeroconf"
 )
 
-func RegisterDevice() {
+// RegisterService for registration of _yottamusic service over mDNS
+func RegisterService() {
 
 	name := "YottaMusic"          //flag.String("name", "YottaMusic", "Name for the Service.")
 	service := "_yottamusic._tcp" //flag.String("service", "_yottamusic._tcp", "Set the service type of the new Service.")
 	domain := "local."            //flag.String("domain", "local.", "Set the network Domain.")
 	port := 80                    //flag.Int("port", 80, "Set the port the service is listening to.")
 
-	hostName, err := ioutil.ReadFile("/etc/hostname")
+	hostName, err := os.Hostname()
 	if err != nil {
 		log.Fatal(err)
 	} else {
-		fmt.Printf("Device Name: %s", hostName)
+		// fmt.Printf("Device Name: %s", hostName)
 		name = string(hostName)
 	}
 
-	server, err := zeroconf.Register(name, service, domain, port, []string{"txtv=0", "lo=1", "la=2"}, nil)
-	if err != nil {
-		panic(err)
+	// Metadata information about the service
+	metadata := []string{
+		"version = 0.1",
+		"developer = Shachindra",
 	}
-	defer server.Shutdown()
+
+	mDNSService, err := zeroconf.Register(name, service, domain, port, metadata, nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer mDNSService.Shutdown()
 	log.Println("Published service:")
 	log.Println("- Name:", name)
 	log.Println("- Type:", service)

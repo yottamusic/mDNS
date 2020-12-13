@@ -1,8 +1,5 @@
-module mDNS.go
+module github.com/yottamusic/mDNS
 
-go 1.14
+go 1.15
 
-require (
-	github.com/grandcat/zeroconf v1.0.0 // indirect
-	github.com/yottamusic/mDNS v0.0.0-20200413124534-61542ddcd394
-)
+require github.com/grandcat/zeroconf v1.0.0
